@@ -4,8 +4,6 @@ function getComputerChoice() {
     return choices[random];
 }
 
-console.log(getComputerChoice());
-
 function getHumanChoice() {
     const validChoices = ['rock', 'paper','scissors'];
     let userInput = prompt("Please enter your choice: rock, paper or scissors").toLowerCase();
@@ -41,13 +39,12 @@ function playRound() {
         result = `You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`;
         humanScore++;
     } else {
-        result = `Computer wins! ${computerChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${humanChoice}.`;
+        result = `Computer wins! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`;
         computerScore++;
     } 
 
     console.log(result);
     console.log(`Scores: Player ${humanScore} - Computer ${computerScore}`);
-
   }
 
   
