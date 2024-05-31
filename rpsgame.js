@@ -39,6 +39,10 @@ function playRound(humanChoice, computerChoice) {
         result = `Computer wins! ${computerChoice.charAt(0).toUpperCase() + userChoice.slice(1)} beats ${humanChoice}.`;
         computerScore++;
     } 
+
+    console.log(result);
+    console.log(`Scores: Player ${humanScore} - Computer ${computerScore}`)
+
   }
   
   const humanSelection = getHumanChoice();
