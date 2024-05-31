@@ -57,3 +57,11 @@ for (let i = 0; i < 5; i++) {
     playRound();
 }
 
+if (humanScore > computerScore) {
+    console.log("Congratulations, you won the game!");
+} else if (computerScore > humanScore) {
+    console.log("Unlucky, the computer has beaten you..");
+} else {
+    console.log("It's a tie.");
+}
+
