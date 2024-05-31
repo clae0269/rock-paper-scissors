@@ -19,6 +19,10 @@ function getHumanChoice() {
 
 console.log(getHumanChoice());
 
+
+function playGame() {
+
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -41,9 +45,10 @@ function playRound(humanChoice, computerChoice) {
     } 
 
     console.log(result);
-    console.log(`Scores: Player ${humanScore} - Computer ${computerScore}`)
+    console.log(`Scores: Player ${humanScore} - Computer ${computerScore}`);
 
   }
+}
   
   const humanSelection = getHumanChoice();
   const computerSelection = getComputerChoice();
