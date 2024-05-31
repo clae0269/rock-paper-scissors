@@ -18,3 +18,29 @@ function getHumanChoice() {
 }
 
 console.log(getHumanChoice());
+
+let humanScore = 0;
+let computerScore = 0;
+
+
+function playRound(humanChoice, computerChoice) {
+    let result;
+    if (humanChoice === computerChoice) {
+        return `It's a tie! both chose ${userChoice}.`;
+    }
+    else if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+    ){
+        result =  `You win! ${userChoice.charAt(0).toUpperCase() + userChoice.slice(1)} beats ${computerChoice}.`;
+    } else {
+        return `Computer wins! ${computerChoice.charAt(0).toUpperCase() + userChoice.slice(1)} beats ${humanChoice}.`;
+    } 
+  }
+  
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+  
+  playRound(humanSelection, computerSelection);
+  
