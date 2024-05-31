@@ -8,7 +8,7 @@ console.log(getComputerChoice());
 
 function getHumanChoice() {
     const validChoices = ['rock', 'paper','scissors'];
-    let userInput = prompt("Please enter your choice(rock, paper or scissors)").toLowerCase();
+    let userInput = prompt("Please enter your choice: rock, paper or scissors").toLowerCase();
 
     while (!validChoices.includes(userInput)) {
         userInput = prompt("Invalid choice. Please enter rock, paper, or scissors:").toLowerCase();
@@ -53,5 +53,7 @@ function playRound(humanChoice, computerChoice) {
   const humanSelection = getHumanChoice();
   const computerSelection = getComputerChoice();
   
-  playRound(humanSelection, computerSelection);
-  
+for (let i = 0; i < 5; i++) {
+    playRound();
+}
+
