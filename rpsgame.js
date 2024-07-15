@@ -1,64 +1,93 @@
+const buttons = document.querySelectorAll('.choice-btn');
+const compScoreDisplay = document.querySelector('#comp-score');
+const playerScoreDisplay = document.querySelector('#player-score');
+const results = document.querySelector('.results');
+const restart = document.querySelector('#reset-btn');
+
+let playerChoice;
+
+let compScore = playerScore = 0;
+
+buttons.forEach(button => {
+    button.addEventListener('click', (e)=>{
+        const target = e.currentTarget;
+        const playerChoice = target.id;
+
+        playRound(playerChoice, getComputerChoice());
+
+        if(playerScore === 5 || compScore === 5){
+            gameOver(playerScore, compScore);
+        }
+    });
+});
+
+    restart.addEventListener('click', (e)=>{
+        compScore = playerScore = 0;
+        buttons[0].disabled = false;
+        buttons[1].disabled = false;
+        buttons[2].disabled = false;
+        scoreDisplay(compScore, playerScore);
+        results.textContent = "";
+        restart.style.display = 'none';
+    })
+
+
 function getComputerChoice() {
-    const choices =['rock', 'paper', 'scissors'];
-    const random = Math.floor(Math.random() * choices.length);
-    return choices[random];
+
+    const choices = ["rock", "paper", "scissors"];
+    return choices [Math.floor(Math.random() * choices.length)]
 }
 
-function getHumanChoice() {
-    const validChoices = ['rock', 'paper','scissors'];
-    let userInput = prompt("Please enter your choice: rock, paper or scissors").toLowerCase();
+function playRound(playerSelection, computerSelection){
 
-    while (!validChoices.includes(userInput)) {
-        userInput = prompt("Invalid choice. Please enter rock, paper, or scissors:").toLowerCase();
+    restart.style.display  = 'none';
+    const computerChoice = document.createElement('span');
+    computerChoice.classList.add('compSele');
+
+
+    const compChoiceToBeDisplayed = computerSelection.toUpperCase().slice(0,1) + computerSelection.slice(1);
+
+    if(playerSelection === computerSelection){
+        results.innerHTML = "Computer Chooses: " + compChoiceToBeDisplayed + "<br>It's a Draw!";
+        scoreDisplay(compScore, playerScore);
+
     }
 
-    return userInput;
-}
+    else if(playerSelection === 'rock' && computerSelection ==='scissors' || playerSelection === 'paper' && computerSelection === 'rock' || playerSelection === 'scissors' && computerSelection=== 'paper'){
+        playerScore++;
+        results.innerHTML = "Computer Chooses: " + compChoiceToBeDisplayed + "<br>You Win!";
+        scoreDisplay(compScore, playerScore);
+    }
 
-
-function playGame() {
-
-
-let humanScore = 0;
-let computerScore = 0;
-
-
-function playRound() {
-
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
+    else{
+        compScore++;
+        results.innerHTML = "Computer Chooses: " + compChoiceToBeDisplayed + "<br>You Lose!";
+        scoreDisplay(compScore, playerScore);
+    }
     
-    let result;
-    if (humanChoice === computerChoice) {
-        result = `It's a tie! both chose ${humanChoice}.`;
-    } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
-    ){
-        result = `You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`;
-        humanScore++;
-    } else {
-        result = `Computer wins! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`;
-        computerScore++;
-    } 
-
-    console.log(result);
-    console.log(`Scores: Player ${humanScore} - Computer ${computerScore}`);
-  }
-
-  
-for (let i = 0; i < 5; i++) {
-    playRound();
 }
 
-if (humanScore > computerScore) {
-    console.log("Congratulations, you won the game!");
-} else if (computerScore > humanScore) {
-    console.log("Unlucky, the computer has beaten you..");
-} else {
-    console.log("It's a tie.");
- }
+function scoreDisplay(compScore, playerScore){
+    compScoreDisplay.textContent = 'Computer Score:' + compScore;
+    playerScoreDisplay.textContent = 'Player Score:' + playerScore;
 }
 
-playGame();
+function gameOver(playerScore, compScore){
+    buttons[0].disabled = true;
+    buttons[1].disabled = true;
+    buttons[2].disabled = true;
+
+
+    if(playerScore>compScore){
+        results.textContent = "You Win!!!";
+    }
+    else{
+        results.textContent = "You Lose!!!"
+    }
+
+    restart.style.display = 'flex';
+}
+
+
+
+
